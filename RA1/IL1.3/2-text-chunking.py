@@ -1,32 +1,35 @@
+# Inicializa este script en tu terminal con el comando: `streamlit run 2-text-chunking.py`
+
 import streamlit as st
 import re
 
 st.set_page_config(page_title="Text Chunking Demo", page_icon="📝", layout="wide")
 
-def chunking_text(text, chunk_size=200, overlap=50):
-    """Divide el texto en chunks con solapamiento"""
+def chunking_text(text, chunk_size=200, overlap=50): # función con 3 parametros
+    """Divide el texto en chunks con solapamiento""" #docString texto fijo
     words = text.split()
-    chunks = []
+    chunks = [] #resultados finales 
     
     # Validar que el solapamiento sea menor que el tamaño del chunk
     if overlap >= chunk_size:
-        overlap = chunk_size - 1
+        overlap = chunk_size - 1 
     
-    step = max(1, chunk_size - overlap)  # Asegurar que el paso sea al menos 1
+    # calcular el paso para el solapamiento para asegurar que no sea menor que 1
+    step = max(1, chunk_size - overlap)  #= 150
     
     for i in range(0, len(words), step):
-        chunk = ' '.join(words[i:i + chunk_size])
+        chunk = ' '.join(words[i:i + chunk_size]) 
         chunks.append(chunk)
-        
-        if i + chunk_size >= len(words):
+    # si el indice + tamaño del chunk es mayor o igual al total de palabras, se rompe el bucle
+        if i + chunk_size >= len(words): 
             break
     
     return chunks
 
 def chunking_by_sentences(text, max_sentences=5, overlap_sentences=1):
     """Divide el texto por oraciones"""
-    sentences = re.split(r'[.!?]+', text)
-    sentences = [s.strip() for s in sentences if s.strip()]
+    sentences = re.split(r'[.!?]+', text) # corta por signos de puntuación y los elimina
+    sentences = [s.strip() for s in sentences if s.strip()] # # Eliminar oraciones con espacio sobrante
     
     chunks = []
     
@@ -37,7 +40,8 @@ def chunking_by_sentences(text, max_sentences=5, overlap_sentences=1):
     step = max(1, max_sentences - overlap_sentences)
     
     for i in range(0, len(sentences), step):
-        chunk_sentences = sentences[i:i + max_sentences]
+        chunk_sentences = sentences[i:i + max_sentences] 
+         # Agregar un punto al final de cada chunk para mantener la puntuación entre elementos + . final 
         chunk = '. '.join(chunk_sentences) + '.'
         chunks.append(chunk)
         
@@ -48,8 +52,9 @@ def chunking_by_sentences(text, max_sentences=5, overlap_sentences=1):
 
 def chunking_by_paragraphs(text):
     """Divide el texto por párrafos"""
-    paragraphs = text.split('\n\n')
-    chunks = [p.strip() for p in paragraphs if p.strip()]
+    paragraphs = text.split('\n\n') # corta entre 2 saltos de linea
+    # Eliminar párrafos vacíos
+    chunks = [p.strip() for p in paragraphs if p.strip()] #elimina los espacios sobrantes
     return chunks
 
 def chunking_by_characters(text, chunk_size=500, overlap=100):
@@ -62,7 +67,7 @@ def chunking_by_characters(text, chunk_size=500, overlap=100):
     
     step = max(1, chunk_size - overlap)
     
-    for i in range(0, len(text), step):
+    for i in range(0, len(text), step): # corta en cantidad de caracteres
         chunk = text[i:i + chunk_size]
         chunks.append(chunk)
         

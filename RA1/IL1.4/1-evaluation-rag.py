@@ -25,40 +25,41 @@ except ImportError:
 
 # --- Configuración del Cliente y Modelos de LangChain ---
 # Only set environment variables if they exist
-github_token = os.getenv("GITHUB_TOKEN")
-github_base_url = os.getenv("GITHUB_BASE_URL", "https://models.inference.ai.azure.com")
+groq_api_key = os.getenv("GROQ_API_KEY")
+groq_base_url = os.getenv("GROQ_BASE_URL")
+openrouter_api_key = os.getenv("OPENROUTER_API_KEY")
+openrouter_base_url = os.getenv("OPENROUTER_BASE_URL")
 
-if github_token:
-    os.environ["OPENAI_API_KEY"] = github_token
-    os.environ["OPENAI_API_BASE"] = github_base_url
-else:
-    st.error("❌ GITHUB_TOKEN environment variable is not set. Please check your .env file.")
-    st.info("💡 Make sure your .env file contains: GITHUB_TOKEN=your_token_here")
+if not groq_api_key:
+    st.error("❌ GROQ_API_KEY environment variable is not set. Please check your .env file.")
+    st.info("💡 Make sure your .env file contains: GROQ_API_KEY=your_token_here")
     st.stop()
 
 st.set_page_config(page_title="RAG Evaluation", page_icon="📊", layout="wide")
 
 def initialize_client():
-    if not github_token:
-        st.error("❌ GitHub token not available")
+    if not groq_api_key:
+        st.error("❌ Groq API key not available")
         return None
-    
+
     client = OpenAI(
-        base_url=github_base_url,
-        api_key=github_token
+        base_url=groq_base_url,
+        api_key=groq_api_key
     )
     return client
 
 def initialize_embeddings():
     """Initialize LangChain embeddings model"""
-    if not github_token:
-        st.error("❌ GitHub token not available for embeddings")
+    if not openrouter_api_key:
+        st.error("❌ OpenRouter API key not available for embeddings")
         return None
-    
+
     try:
-        # Modelo de embeddings (compatible con la API de OpenAI)
+        # Modelo de embeddings (vía OpenRouter, compatible con la API de OpenAI)
         embeddings = OpenAIEmbeddings(
-            model="text-embedding-3-small"
+            model="nvidia/llama-nemotron-embed-vl-1b-v2:free",
+            base_url=openrouter_base_url,
+            api_key=openrouter_api_key
         )
         return embeddings
     except Exception as e:
@@ -114,7 +115,7 @@ Responde SOLO con el número:"""
 
     try:
         result = client.chat.completions.create(
-            model="gpt-4o",
+            model="openai/gpt-oss-120b",
             messages=[{"role": "user", "content": eval_prompt}],
             temperature=0.1,
             max_tokens=10
@@ -143,7 +144,7 @@ Responde SOLO con el número:"""
 
     try:
         result = client.chat.completions.create(
-            model="gpt-4o",
+            model="openai/gpt-oss-120b",
             messages=[{"role": "user", "content": eval_prompt}],
             temperature=0.1,
             max_tokens=10
@@ -168,7 +169,7 @@ Responde SOLO 'SI' o 'NO':"""
         
         try:
             result = client.chat.completions.create(
-                model="gpt-4o",
+                model="openai/gpt-oss-120b",
                 messages=[{"role": "user", "content": eval_prompt}],
                 temperature=0.1,
                 max_tokens=5
@@ -232,7 +233,7 @@ Responde basándote únicamente en el contexto proporcionado."""
 
     try:
         response = client.chat.completions.create(
-            model="gpt-4o",
+            model="openai/gpt-oss-120b",
             messages=[{"role": "user", "content": prompt}],
             temperature=0.7,
             max_tokens=600
@@ -300,10 +301,10 @@ def main():
     st.title("📊 RAG con Evaluación y Monitoreo (LangChain)")
     st.write("Sistema RAG con métricas detalladas usando LangChain para embeddings")
     
-    # Check if GitHub token is available
-    if not github_token:
-        st.error("❌ Please check your .env file and make sure GITHUB_TOKEN is set.")
-        st.info("💡 Your .env file should contain: GITHUB_TOKEN=your_token_here")
+    # Check if Groq API key is available
+    if not groq_api_key:
+        st.error("❌ Please check your .env file and make sure GROQ_API_KEY is set.")
+        st.info("💡 Your .env file should contain: GROQ_API_KEY=your_token_here")
         return
     
     if "eval_rag" not in st.session_state:
