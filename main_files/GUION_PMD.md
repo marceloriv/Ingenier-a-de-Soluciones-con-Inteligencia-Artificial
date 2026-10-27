@@ -1,17 +1,19 @@
 # GUION N°1
+
 ## ESTRUCTURA DE ASIGNATURA
+
 ### CARGA DE PLAN DE MALETA DIDÁCTICA EN KEY LEARNING
 
 ## 1. IDENTIFICACIÓN
 
-| Campo | Valor |
-|-------|-------|
-| **Asignatura** | |
-| **Sigla** | ISY0101 |
-| **Nombre** | Ingeniería de Soluciones con Inteligencia Artificial |
-| **Escuela** | Informática y Telecomunicaciones |
-| **Carrera o Programa de Estudio** | Optativos Ingeniería en Informática |
-| **Periodo de Desarrollo Instruccional** | 1-2025 |
+| Campo                                   | Valor                                                |
+| --------------------------------------- | ---------------------------------------------------- |
+| **Asignatura**                          |                                                      |
+| **Sigla**                               | ISY0101                                              |
+| **Nombre**                              | Ingeniería de Soluciones con Inteligencia Artificial |
+| **Escuela**                             | Informática y Telecomunicaciones                     |
+| **Carrera o Programa de Estudio**       | Optativos Ingeniería en Informática                  |
+| **Periodo de Desarrollo Instruccional** | 1-2025                                               |
 
 ## 2. DESCRIPCIÓN DE LA ASIGNATURA
 
