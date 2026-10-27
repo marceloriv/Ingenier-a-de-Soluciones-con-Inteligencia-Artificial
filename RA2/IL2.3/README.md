@@ -15,18 +15,21 @@ En este módulo exploramos estrategias avanzadas de planificación y orquestaci�
 ## 📚 Contenido del Módulo
 
 ### 1. Estrategias de Planificación
+
 - [1-planning-strategies.py](1-planning-strategies.py) - Tipos de planificación y algoritmos
 - [2-hierarchical-planning.py](2-hierarchical-planning.py) - Planificación jerárquica
 - [3-reactive-planning.py](3-reactive-planning.py) - Planificación reactiva
 - [4-goal-oriented-planning.py](4-goal-oriented-planning.py) - Planificación orientada a objetivos
 
 ### 2. Orquestación de Agentes
+
 - [5-agent-orchestration.py](5-agent-orchestration.py) - Coordinación de agentes
 - [6-workflow-management.py](6-workflow-management.py) - Gestión de flujos de trabajo
 - [7-task-decomposition.py](7-task-decomposition.py) - Descomposición de tareas
 - [8-resource-allocation.py](8-resource-allocation.py) - Asignación de recursos
 
 ### 3. Coordinación Avanzada
+
 - [9-multi-agent-coordination.py](9-multi-agent-coordination.py) - Coordinación multi-agente
 - [10-conflict-resolution.py](10-conflict-resolution.py) - Resolución de conflictos
 - [11-negotiation-strategies.py](11-negotiation-strategies.py) - Estrategias de negociación
@@ -48,4 +51,4 @@ En este módulo exploramos estrategias avanzadas de planificación y orquestaci�
 
 - [LangChain Planning](https://python.langchain.com/docs/use_cases/autonomous_agents/)
 - [CrewAI Orchestration](https://docs.crewai.com/)
-- [Multi-Agent Systems](https://en.wikipedia.org/wiki/Multi-agent_system) 
+- [Multi-Agent Systems](https://en.wikipedia.org/wiki/Multi-agent_system)
