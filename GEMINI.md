@@ -45,11 +45,12 @@ This is an educational repository for "Ingeniería de Soluciones con Inteligenci
 
 ### Required Environment Variables
 
-The notebooks require these environment variables for API access:
-
-- `GITHUB_BASE_URL`: Base URL for GitHub Models API
-- `GITHUB_TOKEN`: GitHub personal access token for model access
-- `OPENAI_BASE_URL`: Alternative base URL for OpenAI-compatible APIs
+- `LLM_BASE_URL`: Base URL for the LLM API (e.g. `https://api.mistral.ai/v1`)
+- `LLM_API_KEY`: API Key for the LLM provider
+- `LLM_MODEL`: Primary LLM model (e.g. `mistral-small-latest`)
+- `LLM_MODEL_SMALL`: Fast/smaller LLM model (e.g. `ministral-8b-latest`)
+- `OPENAI_BASE_URL` / `OPENAI_API_KEY`: Compatible mapping for LangChain & CrewAI
+- `GITHUB_BASE_URL` / `GITHUB_TOKEN`: Fallback for GitHub Models API
 
 ### Key Dependencies
 

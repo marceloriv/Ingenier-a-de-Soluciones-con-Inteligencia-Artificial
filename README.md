@@ -3,7 +3,8 @@
 Este repositorio contiene todos los materiales, ejemplos y prácticas del curso **Ingeniería de Soluciones con Inteligencia Artificial**. El curso está organizado en tres grandes módulos (RA), cada uno con submódulos (IL) y ejemplos prácticos en Python y Jupyter.
 
 # IMPORTANTE
-Langchain liberó su versión 1.0 oficialmente (Link: https://github.com/davila7/Ingenier-a-de-Soluciones-con-Inteligencia-Artificial) 
+
+Langchain liberó su versión 1.0 oficialmente (Link: <https://github.com/davila7/Ingenier-a-de-Soluciones-con-Inteligencia-Artificial>)
 Posiblemente algunos bloques de código queden deprecados. Se estará haciendo la mantención del código, pero te recomiendo que revises que las nuevas características de la librería estén utilizando la versión correspondiente.
 
 ---
@@ -20,7 +21,7 @@ El curso cubre desde los fundamentos de la IA generativa y el prompt engineering
 
 ## 🏗️ Estructura del Proyecto
 
-```
+```text
 RA1/  # Fundamentos de IA Generativa y Prompt Engineering
   IL1.1/  # Introducción a LLMs y APIs
   IL1.2/  # Técnicas de prompting
@@ -63,8 +64,15 @@ Cada subcarpeta IL contiene ejemplos en Python (`.py`), notebooks (`.ipynb`) o g
   - Otros: `pandas`, `requests`, etc.
 
 ### Variables de entorno recomendadas
-- `OPENAI_API_KEY` (para ejemplos con OpenAI/LangChain)
-- `GITHUB_TOKEN` (para ejemplos con GitHub API)
+
+Configurar en archivo `.env` en la raíz del proyecto (ver [.env.example](.env.example)):
+
+- `LLM_BASE_URL="https://api.mistral.ai/v1"`
+- `LLM_API_KEY="tu-api-key"`
+- `LLM_MODEL="mistral-small-latest"`
+- `LLM_MODEL_SMALL="ministral-8b-latest"`
+- `OPENAI_API_KEY` / `OPENAI_BASE_URL` (para compatibilidad directa con LangChain y CrewAI)
+- `GITHUB_TOKEN` (opcional, para modelos en GitHub Models)
 
 ---
 
