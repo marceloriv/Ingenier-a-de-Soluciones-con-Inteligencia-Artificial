@@ -25,10 +25,14 @@ herramienta_suma = Tool(
 )
 
 # Inicializa el LLM y el agente
+base_url = os.getenv("LLM_BASE_URL") or os.getenv("OPENAI_BASE_URL") or os.getenv("GITHUB_BASE_URL", "https://api.mistral.ai/v1")
+api_key = os.getenv("LLM_API_KEY") or os.getenv("OPENAI_API_KEY") or os.getenv("GITHUB_TOKEN")
+model_name = os.getenv("LLM_MODEL", "mistral-small-latest")
+
 llm = ChatOpenAI(
-    model="openai/gpt-4o-mini",
-    api_key=os.environ.get("GITHUB_TOKEN"),
-    base_url="https://models.github.ai/inference",
+    model=model_name,
+    api_key=api_key,
+    base_url=base_url,
     temperature=0
 )
 agente = initialize_agent(

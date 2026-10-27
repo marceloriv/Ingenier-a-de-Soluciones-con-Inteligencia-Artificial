@@ -12,10 +12,14 @@ import os
 
 
 # LLM compatible con GitHub Models
+base_url = os.getenv("LLM_BASE_URL") or os.getenv("OPENAI_BASE_URL") or os.getenv("GITHUB_BASE_URL", "https://api.mistral.ai/v1")
+api_key = os.getenv("LLM_API_KEY") or os.getenv("OPENAI_API_KEY") or os.getenv("GITHUB_TOKEN")
+model_name = os.getenv("LLM_MODEL", "mistral-small-latest")
+
 llm = LLM(
-    model="openai/gpt-4o-mini",
-    api_key=os.environ["GITHUB_TOKEN"],
-    base_url="https://models.github.ai/inference",
+    model=f"openai/{model_name}" if not model_name.startswith("openai/") else model_name,
+    api_key=api_key,
+    base_url=base_url,
     temperature=0
 )
 
