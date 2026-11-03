@@ -4,20 +4,21 @@ IL3.1: Herramientas de Observabilidad y Métricas
 Ejemplo de cómo agregar logs y métricas simples a un agente.
 """
 
-import logging
-import time
+import logging #trae la herramineta para logging
+import time #trae la herramienta para medir tiempo 
 
 # Configura logging básico
 logging.basicConfig(level=logging.INFO)
 
-class Agent:
+class Agent: # clase que define el molde del agente
     def __init__(self):
         self.counter = 0
 
+    #metodo que recibe un mensaje
     def act(self, message):
-        start = time.time()
-        logging.info(f"Recibido mensaje: {message}")
-        self.counter += 1
+        start = time.time() 
+        logging.info(f"Recibido mensaje: {message}") 
+        self.counter += 1 
         response = f"Respuesta #{self.counter} a: {message}"
         duration = time.time() - start
         logging.info(f"Duración de respuesta: {duration:.4f} segundos")
