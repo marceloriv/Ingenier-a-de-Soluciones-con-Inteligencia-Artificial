@@ -1,55 +1,41 @@
 """
 IL2.3: Planificación Básica con LangChain
 ========================================
-Ejemplo de cómo un agente LangChain puede planificar y ejecutar pasos simples usando una herramienta.
+Ejemplo de cómo un agente react en LangChain puede planificar y ejecutar pasos simples usando una herramienta.
 """
 
-# Requiere: pip install langchain langchain-classic langchain-openai openai python-dotenv
-import os
-
-from dotenv import load_dotenv
-from langchain_classic.agents import AgentType, Tool, initialize_agent
+# Requiere: pip install langchain langchain-openai python-dotenv
 from langchain_openai import ChatOpenAI
+from langchain_classic.agents import initialize_agent, Tool, AgentType
+import os
+from dotenv import load_dotenv
 
-load_dotenv()
-
-# Verificar que tenemos las bibliotecas correctas
-print("OpenAI library version:", __import__("openai").__version__)
-print("Python version:", __import__("sys").version)
-
+load_dotenv()  # Carga GROQ_BASE_URL y GROQ_API_KEY desde el archivo .env
 
 # Herramienta personalizada: pasos para preparar café
 def pasos_cafe(_):
     return "1. Calentar agua\n2. Añadir café al filtro\n3. Verter agua caliente\n4. Servir en una taza"
 
-
 herramienta_cafe = Tool(
     name="PasosCafé",
     func=pasos_cafe,
-    description="Devuelve los pasos para preparar café.",
+    description="Devuelve los pasos para preparar café."
 )
 
-# Configuración del cliente con variables de entorno para Groq Models
-base_url = os.environ.get("GROQ_BASE_URL")
-api_key = os.environ.get("GROQ_API_KEY")
-model_name = "openai/gpt-oss-120b"
-
+# Inicializa el LLM y el agente
 llm = ChatOpenAI(
-    model=model_name,
-    api_key=api_key,
-    base_url=base_url,
-    temperature=0,
+    model="openai/gpt-oss-120b",
+    api_key=os.environ.get("GROQ_API_KEY"),
+    base_url=os.environ.get("GROQ_BASE_URL"),
+    temperature=0
 )
 agente = initialize_agent(
     tools=[herramienta_cafe],
     llm=llm,
     agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
-    verbose=True,
-    handle_parsing_errors=True,
+    verbose=True
 )
 
-if __name__ == "__main__":
+if __name__ == "__main__": #si el archivo se ejecuta directamente, 
     print("Planificación con LangChain:")
-    print(
-        agente.invoke({"input": "¿Cuáles son los pasos para preparar café?"})["output"]
-    )
+    print(agente.run("¿Cuáles son los pasos para preparar café?")) 

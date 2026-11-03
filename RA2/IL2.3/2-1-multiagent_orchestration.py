@@ -1,7 +1,7 @@
 """
 IL2.3: Orquestación Multi-Agente Básica
 ======================================
-Ejemplo de cómo dos agentes pueden coordinarse para resolver una tarea.
+Ejemplo de simulación de cómo dos agentes pueden coordinarse para resolver una tarea.
 """
 
 class AgentA:
